@@ -1,42 +1,25 @@
-import { Authentication, Device, Fleet } from "@formant/data-sdk";
-import { useEffect, useState } from "react";
 import styles from "./Instructions.module.scss";
 
 export const Instructions = () => {
-  const [user, setUser] = useState("");
-  const [host, setHost] = useState("");
-
-  useEffect(() => {
-    getuser();
-  }, []);
-
-  const getuser = async () => {
-    if (await Authentication.waitTilAuthenticated()) {
-      const device = await Fleet.getCurrentDevice();
-      setUser(Authentication.currentUser!.firstName);
-      setHost(device.name);
-    }
-  };
-
   return (
     <div className={styles.instructions}>
       <ul className={styles["instructions-list"]}>
         <li>
-          <a
-            className={styles["instructions-link"]}
-            target="_blank"
-            href="https://docs.formant.io/reference/fctl"
-          >
-            Install fctl
-          </a>
+          <span>1. Teleop device</span>
         </li>
         <li>
-          <span>Make sure you fctl init and type in username + password</span>
+          <span>2. Click the three dots in the bottom right corner</span>
         </li>
         <li>
-          <span>{`ssh ${"<user-on-computer>"}@${
-            host || "<device-name>"
-          }.formant`}</span>
+          <span>3. Click open terminal</span>
+        </li>
+        <li>
+          <span>
+            4. NOTE: this terminal will be the{" "}
+            <span className={styles.terminal}>formant</span> user use
+            <span className={styles.terminal}> su - USER</span> to change to
+            USER of your choise
+          </span>
         </li>
       </ul>
     </div>
